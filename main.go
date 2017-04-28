@@ -1,5 +1,6 @@
 package main
 
+// comment
 import "fmt"
 import "os"
 import "os/signal"
