@@ -42,7 +42,7 @@ build:
     - script:
         name: go test
         code: |
-          go run ./main.go
+          go run ./main.go &
 
 deploy:
   steps:
