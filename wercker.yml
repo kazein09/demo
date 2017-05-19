@@ -27,22 +27,22 @@ build:
     - setup-go-workspace
 
     # Gets the dependencies
-#    - script:
-#        name: go get
-#        code: |
-#          go get github.com/kazein09/mywarcker
+    - script:
+        name: go get
+        code: |
+          go get github.com/kazein09/mywarcker
 
     # Build the project
     - script:
         name: go build
         code: |
-          go test ./main.go
+          go test /go/src/github.com/kazein09/demo/main.go
 
     # Test the project
     - script:
         name: go test
         code: |
-          go build ./main.go
+          go build /go/src/github.com/kazein09/demo/main.go
 
 deploy:
   steps:
@@ -50,8 +50,8 @@ deploy:
         username: $USERNAME
         password: $PASSWORD
         tag: master
-        cmd: "/go/src/github.com/kazein09/demo/main.go"
-        entrypoint: "/usr/local/go/bin/go run"
+        cmd: "/usr/local/go/bin/go run /go/src/github.com/kazein09/demo/main.go"
+        entrypoint: "/usr/local/go/bin/go"
         ports: "80"
         repository: kazein09/demo
         registry: https://registry.hub.docker.com
