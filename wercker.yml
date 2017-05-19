@@ -36,13 +36,13 @@ build:
     - script:
         name: go build
         code: |
-          go build ./main.go
+          go test ./main.go
 
     # Test the project
     - script:
         name: go test
         code: |
-          go run ./main.go &
+          go build ./main.go
 
 deploy:
   steps:
@@ -50,7 +50,8 @@ deploy:
         username: $USERNAME
         password: $PASSWORD
         tag: master
-        cmd: master
+        cmd: "/go/src/github.com/kazein09/demo/main.go"
+        entrypoint: "/usr/local/go/bin/go run"
         ports: "80"
         repository: kazein09/demo
         registry: https://registry.hub.docker.com
