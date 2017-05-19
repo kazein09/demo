@@ -71,7 +71,7 @@ deploy:
     - internal/docker-push:
         username: $USERNAME
         password: $PASSWORD
-        tag: 0.1
+        tag: "0.1"
         cmd: "run /go/src/github.com/kazein09/demo/main.go"
         entrypoint: "/usr/local/go/bin/go"
         ports: "80"
