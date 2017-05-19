@@ -50,7 +50,7 @@ deploy:
         username: $USERNAME
         password: $PASSWORD
         tag: master
-        cmd: "/usr/local/go/bin/go run /go/src/github.com/kazein09/demo/main.go"
+#        cmd: "/usr/local/go/bin/go run /go/src/github.com/kazein09/demo/main.go"
 #        entrypoint: "/usr/local/go/bin/go"
         ports: "80"
         repository: kazein09/demo
