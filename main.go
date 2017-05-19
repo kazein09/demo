@@ -2,7 +2,7 @@
 
 package main
 
-import (  
+import (
     "fmt"
     "net"
     "os"
@@ -10,13 +10,13 @@ import (
     "bytes"
 )
 
-const (  
+const (
     CONN_HOST = ""
     CONN_PORT = "80"
     CONN_TYPE = "tcp"
 )
 
-func main() {  
+func main() {
     // Listen for incoming connections.
     l, err := net.Listen(CONN_TYPE, ":"+CONN_PORT)
     if err != nil {
@@ -42,8 +42,40 @@ func main() {
     }
 }
 
+func myHomeIP() string {
+    ifaces, err := net.Interfaces()
+    if err != nil {
+        return "(can't enumerate net interfaces: " + err.Error() + ")"
+    }
+
+    for _, i := range ifaces {
+        addrs, err := i.Addrs()
+        if err != nil {
+            continue
+        }
+
+        for _, addr := range addrs {
+            var ip net.IP
+            switch v := addr.(type) {
+            case *net.IPNet:
+                ip = v.IP
+            case *net.IPAddr:
+                ip = v.IP
+            }
+
+            if ip.IsLoopback() {
+                continue
+            }
+
+            return ip.String()
+        }
+    }
+
+    return "(no IP address found)"
+}
+
 // Handles incoming requests.
-func handleRequest(conn net.Conn) {  
+func handleRequest(conn net.Conn) {
   // Make a buffer to hold incoming data.
   buf := make([]byte, 1024)
   // Read the incoming connection into the buffer.
@@ -53,10 +85,12 @@ func handleRequest(conn net.Conn) {
   }
   // Builds the message.
   message := "Hi, I received your message! It was "
-  message += strconv.Itoa(reqLen) 
-  message += " bytes long and that's what it said: \"" 
+  message += strconv.Itoa(reqLen)
+  message += " bytes long and that's what it said: \""
   n := bytes.Index(buf, []byte{0})
   message += string(buf[:n-1])
+  message += "My IP address is: "
+  message += myHomeIP()
   message += "\" ! Honestly I have no clue about what to do with your messages, so Bye Bye!\n"
 
   // Write the message in the connection channel.
