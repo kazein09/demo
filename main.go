@@ -89,7 +89,7 @@ func handleRequest(conn net.Conn) {
   message += " bytes long and that's what it said: \""
   n := bytes.Index(buf, []byte{0})
   message += string(buf[:n-1])
-  message += "My IP address is: "
+  message += "My Docker IP address is: "
   message += myHomeIP()
   message += "\" ! Honestly I have no clue about what to do with your messages, so Bye Bye!\n"
 
