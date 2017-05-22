@@ -92,6 +92,7 @@ func handleRequest(conn net.Conn) {
   message += "My Docker IP address is: "
   message += myHomeIP()
   message += "\" ! Honestly I have no clue about what to do with your messages, so Bye Bye! Created by @Kalinux\n"
+  message += "\" ! Im new Update"
 
   // Write the message in the connection channel.
   conn.Write([]byte(message));
