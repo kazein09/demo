@@ -84,7 +84,7 @@ func handleRequest(conn net.Conn) {
     fmt.Println("Error reading:", err.Error())
   }
   // Builds the message.
-  message := " @kalinux Message was: "
+  message := " Upgrade Message was: "
   message += strconv.Itoa(reqLen)
   message += " bytes long and that's what it said: \""
   n := bytes.Index(buf, []byte{0})
